@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
+import logging
 import spidev
 import time
 from cc1200_config import *
 
+_LOGGER = logging.getLogger(__name__)
 
 class CC1200:
     """
@@ -59,7 +61,7 @@ class CC1200:
         For efficiency, contiguous register addresses are grouped and
         written via burst write operations.
         """
-        config = self.config['config_registers']
+        config = self.config['preset_groups']
         if not config:
             return
 
