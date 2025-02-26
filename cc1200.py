@@ -54,7 +54,7 @@ class CC1200:
         result = self.spi.xfer2([burst_addr] + [0x00] * length)
         return result[1:]  # First byte is the status byte
 
-    def configure(self):
+    # def configure(self):
         """
         Configures the CC1200 with required register settings.
 
@@ -91,6 +91,14 @@ class CC1200:
                 self.write_burst(start_addr, data)
             time.sleep(0.005)  # Optional delay between groups for register settling
 
+    def configure(self):
+        """
+        Configures the CC1200 with required register settings.
+        """
+        for reg, value in self.config['config_registers'].items():
+            self.write_register(reg, value)
+            time.sleep(0.01)  # Allow time for register settling
+    
     def tx(self, data):
         """
         Transmits a payload.
