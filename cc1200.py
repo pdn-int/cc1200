@@ -23,20 +23,20 @@ class CC1200:
         """
         Sends a command strobe to the CC1200 and returns the status byte.
         """
-        status = self.spi.xfer2([strobe])
+        status = self.spi.xfer3([strobe])
         return status[0]
 
     def write_register(self, addr, value):
         """
         Writes a single byte to a specified register.
         """
-        self.spi.xfer2([addr, value])
+        self.spi.xfer3([addr, value])
 
     def read_register(self, addr):
         """
         Reads a single byte from a specified register.
         """
-        result = self.spi.xfer2([addr | 0x80, 0x00])
+        result = self.spi.xfer3([addr | 0x80, 0x00])
         return result[1]
 
     def write_burst(self, addr, data):
@@ -44,14 +44,14 @@ class CC1200:
         Writes multiple bytes (burst mode) starting at the given register address.
         """
         burst_addr = addr | 0x40  # Set burst bit for multi-byte write
-        self.spi.xfer2([burst_addr] + data)
+        self.spi.xfer3([burst_addr] + data)
 
     def read_burst(self, addr, length):
         """
         Reads multiple bytes (burst mode) starting at the given register address.
         """
         burst_addr = addr | 0xC0  # Set read and burst bits for multi-byte read
-        result = self.spi.xfer2([burst_addr] + [0x00] * length)
+        result = self.spi.xfer3([burst_addr] + [0x00] * length)
         return result[1:]  # First byte is the status byte
 
     # def configure(self):
@@ -95,7 +95,7 @@ class CC1200:
         """
         Configures the CC1200 with required register settings.
         """
-        for reg, value in self.config['config_registers'].items():
+        for reg, value in self.config['preset_groups'].items():
             self.write_register(reg, value)
             time.sleep(0.01)  # Allow time for register settling
     

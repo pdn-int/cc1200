@@ -583,19 +583,15 @@ EXPERT_HIGH_5={
 }
 
 
-# Address Config = No address check 
 # Bit Rate = 50 
 # Carrier Frequency = 920.599976 
-# Deviation = 24.948120 
-# Device Address = 0 
-# Manchester Enable = false 
+# Deviation = 24.948120
 # Modulation Format = 2-GFSK 
 # Packet Bit Length = 0 
 # Packet Length = 255 
 # Packet Length Mode = Variable 
 # RX Filter BW = 104.166667 
 # Symbol rate = 50 
-# Whitening = false 
 EXPERT_HIGH_6={
 "IOCFG2":         Register(0x0001,0x06),    
 "SYNC3":          Register(0x0004,0x6F),    

@@ -5,6 +5,7 @@ from cc1200_preset import *
 READVALUE 						= 0x80
 WRITEVALUE 						= 0x00
 BURSTBITVALUE 					= 0x40
+
 TX_FIFO_ADDR = 0x3F  # TX FIFO address (verify with datasheet)
 RX_FIFO_ADDR = 0x3F  # RX FIFO address (verify with datasheet)
 TX_DELAY     = 0.1   # Transmission delay (seconds)
